@@ -8,9 +8,9 @@ provider:
   name: aws
   runtime: python3.8
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE: ${opt:stage, self:provider.stage}-${self:service}
   iamRoleStatements:
-      RoleName: deafult # required if you want to use 'serverless deploy --function' later on    - Effect: Allow
+      Effect: Allow
       Action:
         - dynamodb:Query
         - dynamodb:Scan
