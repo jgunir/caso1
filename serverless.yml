@@ -1,6 +1,6 @@
 org: jgunir
 app: todo-list-serverless
-service: serverless-rest-api-with-dynamodb
+service: todo-api
 
 frameworkVersion: ">=1.1.0 <3.0.0"
 
@@ -8,17 +8,17 @@ provider:
   name: aws
   runtime: python3.8
   environment:
-    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
+    DYNAMODB_TABLE: ${opt:stage, self:provider.stage}-${self:service}
   iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+      - Effect: "Allow"
+        Action:
+          - dynamodb:Query
+          - dynamodb:Scan
+          - dynamodb:GetItem
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          - dynamodb:DeleteItem
+        Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
 
 functions:
   create:
@@ -71,6 +71,48 @@ functions:
 
 resources:
   Resources:
+    myDefaultRole:
+      Type: AWS::IAM::Role
+      Properties:
+        Path: /my/default/path/
+        RoleName: MyDefaultRole # required if you want to use 'serverless deploy --function' later on
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        # note that these rights are needed if you want your function to be able to communicate with resources within your vpc
+        ManagedPolicyArns:
+          - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
+        Policies:
+          - PolicyName: myPolicyName
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow # note that these rights are given in the default policy and are required if you want logs out of your lambda(s)
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource:
+                    - 'Fn::Join':
+                      - ':'
+                      -
+                        - 'arn:aws:logs'
+                        - Ref: 'AWS::Region'
+                        - Ref: 'AWS::AccountId'
+                        - 'log-group:/aws/lambda/*:*:*'
+                -  Effect: "Allow"
+                   Action:
+                     - "s3:PutObject"
+                   Resource:
+                     Fn::Join:
+                       - ""
+                       - - "arn:aws:s3:::"
+                         - "Ref" : "ServerlessDeploymentBucket"
     TodosDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
