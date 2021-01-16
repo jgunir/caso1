@@ -1,6 +1,6 @@
 org: jgunir
 app: todo-list-serverless
-service: serverless-rest-api-with-dynamodb
+service: todo-api
 
 frameworkVersion: ">=1.1.0 <3.0.0"
 
