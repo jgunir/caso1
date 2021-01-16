@@ -75,7 +75,7 @@ resources:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
-        RoleName: myTodosRolename # required if you want to use 'serverless deploy --function' later on
+        RoleName: serverless-rest-api-with-dynamodb-Pre-us-east-1-lambdaRole # required if you want to use 'serverless deploy --function' later on
         AttributeDefinitions:
           -
             AttributeName: id
