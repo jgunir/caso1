@@ -4,6 +4,7 @@ agent any
         // Validación del software instalado en el servicio
         stage('Validate software'){
             steps {
+                sh 'sudo su'
                 sh 'whoami'
                 sh 'uname -r'
                 sh 'history'
