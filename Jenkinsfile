@@ -1,6 +1,14 @@
 pipeline {
 agent any
     stages {
+        // Validación del software instalado en el servicio
+        stage('Validate software'){
+            steps {
+                sh 'node --version'
+                sh 'npm --version'
+                sh 'python --version'
+            }
+        }
         stage ('Setup') {
             steps  {
                 sh "bash pipeline/PIPELINE-FULL-STAGING/1-setup.sh"
