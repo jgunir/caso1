@@ -2,17 +2,6 @@ pipeline {
 agent any
     stages {
         // Validación del software instalado en el servicio
-        stage('Validate software'){
-            steps {
-                sh 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash'
-                sh '. ~/.nvm/nvm.sh'
-                sh 'nvm install node'
-                sh 'node -e "console.log("Running Node.js " + process.version)"'
-                sh 'node --version'
-                sh 'npm --version'
-                sh 'python --version'
-            }
-        }
         stage ('Setup') {
             steps  {
                 sh "bash pipeline/PIPELINE-FULL-STAGING/1-setup.sh"
