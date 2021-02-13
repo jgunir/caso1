@@ -4,6 +4,7 @@ agent any
         // Validación del software instalado en el servicio
         stage('Validate software'){
             steps {
+                sh 'history'
                 sh 'node --version'
                 sh 'npm --version'
                 sh 'python --version'
