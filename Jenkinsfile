@@ -4,12 +4,17 @@ agent any
         // Validación del software instalado en el servicio
         stage ('Setup') {
             steps  {
-                sh "bash pipeline/PIPELINE-FULL-STAGING/1-setup.sh"
+                sh "bash pipeline/PIPELINE-TEST/1-setup.sh"
             }
         }
         stage ('Test') {
             steps {
-                sh "bash pipeline/PIPELINE-FULL-STAGING/2-testing.sh"
+                sh "bash pipeline/PIPELINE-TEST/2-testing.sh"
+            }
+        }
+        stage ('Clean') {
+            steps {
+                sh 'bash pipeline/PIPELINE-TEST/3-clean.sh'
             }
         }
     }
