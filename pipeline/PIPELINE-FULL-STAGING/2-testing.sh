@@ -1,5 +1,5 @@
 #!/bin/bash
-source py37-venv/bin/activate
+source py36-venv/bin/activate
 set -x
 flake8 todos
 if [[ $? -ne 0 ]]
@@ -18,8 +18,6 @@ if [[ $? -ne 0 ]]
 then
     exit 1
 fi
-
-sudo yum install sqlite-devel
 
 #ommitted by no module _sqlite3
 coverage run test/unified/TestToDoClass.py
