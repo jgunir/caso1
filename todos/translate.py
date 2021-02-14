@@ -8,11 +8,12 @@ dynamodb = boto3.resource('dynamodb')
 
 def translate(event, context):
     table = dynamodb.Table(os.environ['DYNAMODB_TABLE'])
+    parameters = event['pathParameters']
 
     # fetch todo from the database
     result = table.get_item(
         Key={
-            'id': event['pathParameters']['id']
+            'id': parameters['id']
         }
     )
 
@@ -21,9 +22,10 @@ def translate(event, context):
     translate = boto3.client(service_name='translate',
                              region_name='us-east-1',
                              use_ssl=True)
-    translate = translate.translate_text(Text=result['Item']['text'], 
-                                         SourceLanguageCode="auto",
-                                         TargetLanguageCode=event['pathParameters']['lang'])
+    translate = translate.translate_text(
+        Text=result['Item']['text'],
+        SourceLanguageCode="auto",
+        TargetLanguageCode=parameters['lang'])
 
     result['Item']['text'] = translate.get('TranslatedText')
 
