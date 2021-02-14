@@ -5,8 +5,3 @@ python3.7 -m venv py37-venv
 source py37-venv/bin/activate
 pip install -r todos/requirements.txt
 #python src/createTable.py
-
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-. ~/.nvm/nvm.sh
-nvm install --lts
-npm install -g serverless
