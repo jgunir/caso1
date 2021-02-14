@@ -1,6 +1,6 @@
 #!/bin/bash
 source py36-venv/bin/activate
-pytest
+pytest test
 
 set -x
 flake8 todos
