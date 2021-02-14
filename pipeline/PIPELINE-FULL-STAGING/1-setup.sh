@@ -1,10 +1,4 @@
 #!/bin/bash
-wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
-tar -zxvf Python-3.6.3.tgz
-cd Python-3.6.3
-./configure --prefix=/usr/local --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
-make
-sudo make altinstall
 
 docker stop dynamodb || true
 docker system prune -af --volumes
