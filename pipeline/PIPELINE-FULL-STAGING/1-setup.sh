@@ -6,7 +6,7 @@ cd Python-3.6.3
 make
 sudo make altinstall
 
-docker stop `docker ps -q`
+docker stop dynamodb || true
 
 docker run -d --name dynamodb -p 8000:8000 amazon/dynamodb-local
 sleep 10
