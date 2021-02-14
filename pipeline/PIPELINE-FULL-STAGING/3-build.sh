@@ -1,3 +1,3 @@
 #!/bin/bash
 # Send pull request to activate serverless pipeline
-git request-pull develop ./
+git request-pull origin/develop ./
