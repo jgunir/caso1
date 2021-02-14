@@ -19,7 +19,7 @@ then
     exit 1
 fi
 
-yum search libsqlite
+yum install sqlite-devel
 
 #ommitted by no module _sqlite3
 coverage run test/unified/TestToDoClass.py
