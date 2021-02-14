@@ -20,5 +20,5 @@ then
 fi
 
 #ommitted by no module _sqlite3
-#coverage run test/unified/TestToDoClass.py
-#coverage report -m 
+coverage run test/unified/TestToDoClass.py
+coverage report -m
