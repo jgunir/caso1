@@ -16,10 +16,14 @@ def translate(event, context):
         }
     )
 
-    # Auto translate text with AWS Translate https://docs.aws.amazon.com/translate/latest/dg/examples-python.html
-    translate = boto3.client(service_name='translate', region_name='us-east-1', use_ssl=True)
+    # Auto translate text with AWS Translate
+    # https://docs.aws.amazon.com/translate/latest/dg/examples-python.html
+    translate = boto3.client(service_name='translate',
+                             region_name='us-east-1',
+                             use_ssl=True)
     translate = translate.translate_text(Text=result['Item']['text'], 
-    SourceLanguageCode="auto", TargetLanguageCode=event['pathParameters']['lang'])
+                                         SourceLanguageCode="auto",
+                                         TargetLanguageCode=event['pathParameters']['lang'])
 
     result['Item']['text'] = translate.get('TranslatedText')
 
