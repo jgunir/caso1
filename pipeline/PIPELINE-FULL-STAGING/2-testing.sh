@@ -19,6 +19,8 @@ then
     exit 1
 fi
 
+yum search libsqlite
+
 #ommitted by no module _sqlite3
 coverage run test/unified/TestToDoClass.py
 coverage report -m
