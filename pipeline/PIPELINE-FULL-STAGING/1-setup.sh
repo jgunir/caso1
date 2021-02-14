@@ -1,4 +1,5 @@
 #!/bin/bash
+sudo yum list | grep python3
 sudo yum install -y https://repo.ius.io/ius-release-el7.rpm
 sudo yum update -y
 sudo yum install -y python36 python36-pip
