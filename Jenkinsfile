@@ -12,16 +12,6 @@ agent any
                 sh "bash pipeline/PIPELINE-FULL-STAGING/2-testing.sh"
             }
         }
-        stage ('Build') {
-            steps {
-                sh "bash pipeline/PIPELINE-FULL-STAGING/3-build.sh"
-            }
-        }
-        stage ('Clean up') {
-            steps {
-                deleteDir()
-            }
-        }
     }
     post {
         always {
