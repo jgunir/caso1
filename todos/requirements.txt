@@ -3,3 +3,4 @@ radon
 bandit
 flake8_polyfill
 coverage
+pytest
