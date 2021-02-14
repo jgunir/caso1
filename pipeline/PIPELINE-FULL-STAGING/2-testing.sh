@@ -1,19 +1,19 @@
 #!/bin/bash
 source py37-venv/bin/activate
 set -x
-flake8 src
+flake8 todos
 if [[ $? -ne 0 ]]
 then
     exit 1
 fi
 
-radon cc src
+radon cc todos
 if [[ $? -ne 0 ]]
 then
     exit 1
 fi
 
-bandit -r src
+bandit -r todos
 if [[ $? -ne 0 ]]
 then
     exit 1
