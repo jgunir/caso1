@@ -25,8 +25,7 @@ agent any
     }
     post {
         always {
-            sh "docker stop `docker ps -q`"
-            sh "docker system prune -af --volumes"
+             echo 'Parece que todo fue ok!'
         }
         failure {
             echo 'Malas Noticias!'
