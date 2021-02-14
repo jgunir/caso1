@@ -7,6 +7,7 @@ make
 sudo make altinstall
 
 docker stop dynamodb || true
+docker system prune -af --volumes
 
 docker run -d --name dynamodb -p 8000:8000 amazon/dynamodb-local
 sleep 10
