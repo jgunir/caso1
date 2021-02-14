@@ -1,8 +1,10 @@
 #!/bin/bash
-sudo yum list | grep python3
-sudo yum install -y https://repo.ius.io/ius-release-el7.rpm
-sudo yum update -y
-sudo yum install -y python36 python36-pip
+wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
+tar -zxvf Python-3.6.3.tgz
+cd Python-3.6.3
+./configure --prefix=/usr/local --enable-shared LDFLAGS="-Wl,-rpath /usr/local/lib"
+make
+sudo make altinstall
 
 docker stop `docker ps -q`
 
