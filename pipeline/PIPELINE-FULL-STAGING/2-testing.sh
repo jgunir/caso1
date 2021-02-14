@@ -1,4 +1,5 @@
 #!/bin/bash
+
 source py36-venv/bin/activate
 set -x
 flake8 todos
