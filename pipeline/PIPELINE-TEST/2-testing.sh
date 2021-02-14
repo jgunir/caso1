@@ -1,6 +1,7 @@
 #!/bin/bash
-
 source py36-venv/bin/activate
+pytest
+
 set -x
 flake8 todos
 if [[ $? -ne 0 ]]
